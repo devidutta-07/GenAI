@@ -11,6 +11,7 @@ langchain-groq
 langgraph
 
 transformers
+langchain_huggingface
 huggingface-hub
 accelerate
 sentence-transformers
