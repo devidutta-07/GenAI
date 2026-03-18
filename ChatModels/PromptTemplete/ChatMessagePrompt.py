@@ -1,5 +1,6 @@
 from langchain_mistralai import ChatMistralAI
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts.chat import ChatMessagePromptTemplate
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,8 +9,10 @@ model = ChatMistralAI(
     model_name="mistral-small-latest"
 )
 
-prompt = ChatPromptTemplate.from_messages([
-    ("system", """You are a movie information assistant.
+# Create message templates
+system_message = ChatMessagePromptTemplate.from_template(
+    role="system",
+    template="""You are a movie information assistant.
 
 The user will provide a movie name. Your task is to extract and return detailed information about the movie in strictly valid JSON format.
 
@@ -28,14 +31,23 @@ Rules:
 - Return ONLY JSON. No explanation, no extra text.
 - If any information is not available, use null.
 - Ensure the JSON is properly formatted and valid.
-"""),
-    
-    ("human", "Movie name: {movie_name}")
+"""
+)
+
+human_message = ChatMessagePromptTemplate.from_template(
+    role="human",
+    template="Movie name: {movie_name}"
+)
+
+# Combine into chat prompt
+prompt = ChatPromptTemplate.from_messages([
+    system_message,
+    human_message
 ])
 
 movie = input("Enter Movie Name: ")
 
-final_prompt = prompt.invoke({"movie_name": movie})
-result = model.invoke(final_prompt)
-print(final_prompt)
+chain = prompt | model
+result = chain.invoke({"movie_name": movie})
+
 print(result.content)

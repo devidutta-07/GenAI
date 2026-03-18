@@ -37,5 +37,5 @@ movie = input("Enter Movie Name: ")
 
 final_prompt = prompt.invoke({"movie_name": movie})
 result = model.invoke(final_prompt)
-print(final_prompt)
+
 print(result.content)
