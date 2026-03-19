@@ -14,14 +14,14 @@ data=PyPDFLoader("RAG/Data/data.pdf")
 docs=data.load()
 
 splitter=RecursiveCharacterTextSplitter(
-    chunk_size=100,
-    chunk_overlap=5,
+    chunk_size=500,
+    chunk_overlap=50,
 )
 text= splitter.split_documents(docs)
 
 
 vectorstore=Chroma.from_documents(
-    documents=docs,
+    documents=text,  # if use docs then entire pdf is going to store at once.
     embedding=embedding_model,
-    persist_directory="Chroma-DB"
+    persist_directory="Chroma"
 )
