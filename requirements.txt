@@ -17,6 +17,7 @@ accelerate
 sentence-transformers
 
 faiss-cpu
+chromadb
 
 duckduckgo-search
 wikipedia
