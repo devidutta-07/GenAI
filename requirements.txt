@@ -36,3 +36,4 @@ tiktoken
 requests
 aiohttp
 
+unstructured
