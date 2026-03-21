@@ -2,19 +2,19 @@ langchain
 langchain-core
 langchain-community
 
-langchain-openai
+# langchain-openai
 langchain-google-genai
 langchain-mistralai
-langchain-anthropic
-langchain-groq
+# langchain-anthropic
+# langchain-groq
 
-langgraph
+# langgraph
 
-transformers
-langchain_huggingface
-huggingface-hub
-accelerate
-sentence-transformers
+# transformers
+# langchain_huggingface
+# huggingface-hub
+# accelerate
+# sentence-transformers
 
 faiss-cpu
 chromadb
