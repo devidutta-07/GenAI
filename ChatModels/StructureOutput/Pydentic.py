@@ -33,3 +33,16 @@ response=model.invoke(final_prompt)
 
 print(final_prompt)
 print(response.content)
+
+
+""" 
+There are two others ways to have structured output 
+1. TypeDict 
+2. Dataclass
+Difference 
+| Method        | Validation        | Performance     | Best Use                    |
+| ------------- | ----------------- | --------------- | --------------------------- |
+| **Pydantic**  | Strong validation | Slightly slower | Production APIs             |
+| **TypedDict** | No validation     | Fast            | Simple JSON structure       |
+| **Dataclass** | Medium            | Fast            | Pythonic structured objects |
+"""

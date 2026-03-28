@@ -17,6 +17,7 @@ dependencies = [
     "langchain-core>=1.2.20",
     "langchain-google-genai>=4.2.1",
     "langchain-mistralai>=1.1.2",
+    "langchain-ollama>=1.0.1",
     "numpy>=2.4.3",
     "pandas>=2.3.3",
     "pydantic>=2.12.5",

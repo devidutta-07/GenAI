@@ -12,6 +12,5 @@ responses=llm.batch([
     "What is the capital of Germany?",
     "What is the capital of Italy?"
 ])
-
 for response in responses:
     print(response.content)
