@@ -1,11 +1,11 @@
 # What is we want to pass different topics . Then 
 
-from langchain_ollama import ChatOllama
+from langchain_mistralai import ChatMistralAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableParallel,RunnableLambda
 
-llm=ChatOllama(model="mistral:latest")
+llm=ChatMistralAI(model="mistral-small-latest")
 
 parser=StrOutputParser()
 

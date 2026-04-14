@@ -1,23 +1,31 @@
-# If want the value genrrated at a point use in result
-
-from langchain_ollama import ChatOllama
-from langchain_core.output_parsers import StrOutputParser
+from langchain_mistralai import ChatMistralAI
+from langchain_core.runnables import RunnablePassthrough, RunnableParallel
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+from dotenv import load_dotenv
 
-llm=ChatOllama(model="mistral:latest")
+load_dotenv()
 
+llm=ChatMistralAI(model="mistral-small-latest")
 parser=StrOutputParser()
 
 code_prompt=ChatPromptTemplate.from_template(
-    "Write a program on {topic}"
+    "Generate a code on {topic} "
 )
-
 explain_prompt=ChatPromptTemplate.from_template(
-    "Explain this {code}"
+    "explain the {code}"
 )
-chains=code_prompt|llm|parser|{"code":RunnablePassthrough()}|explain_prompt|llm|parser
-response=chains.invoke({"topic":"addition of 3 numbers in python"})
-print(response)
 
-# Now its just giving code explanation . To get code we need to use ParallelRunnables and create a separate branch to store code
+seq1=code_prompt|llm|parser
+# Not used the only response of code is given but no code ... (RunnablePassthrough)
+seq2=RunnableParallel({
+    "code":RunnablePassthrough(),
+    "explanation": explain_prompt|llm|parser
+})
+
+chains=seq1 | seq2
+
+response=chains.invoke({"topic":"palindrome"})
+
+print(response['code'])
+print(response['explanation'])
